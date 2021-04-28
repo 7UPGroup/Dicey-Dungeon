@@ -10,19 +10,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.Start;
 
 public class ButtonController {
 		@FXML
 		private Label button; 	
-		@FXML
-		private TextField input;
-		@FXML
-		private TextArea results;
+		//@FXML
+		//private TextField input;
+		//@FXML
+		//private TextArea results;
 		
 		Start pressedButton = new Start();
 		
 		public void startButton(ActionEvent event)throws IOException{
-			
+			//Start pressedButton = new Start();
 			pressedButton.openWindow();
 			
 			
