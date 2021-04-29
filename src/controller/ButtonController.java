@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.Start;
 
 public class ButtonController {
@@ -19,12 +20,18 @@ public class ButtonController {
 		//private TextField input;
 		//@FXML
 		//private TextArea results;
+		private static Stage origStage;
 		
 		Start pressedButton = new Start();
 		
+		public void getStage(Stage primaryStage) {
+			origStage = primaryStage;
+		}
+		
 		public void startButton(ActionEvent event)throws IOException{
 			//Start pressedButton = new Start();
-			pressedButton.openWindow();
+			
+			pressedButton.openWindow(origStage);
 			
 			
 		}
