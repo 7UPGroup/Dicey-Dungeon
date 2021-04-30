@@ -13,7 +13,7 @@
          </image>
       </ImageView>
       <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#272f36" height="81.0" layoutX="145.0" layoutY="173.0" stroke="TRANSPARENT" strokeType="INSIDE" width="310.0" />
-      <ImageView accessibleRole="BUTTON" fitHeight="61.0" fitWidth="310.0" layoutX="189.0" layoutY="183.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="61.0" fitWidth="310.0" layoutX="189.0" layoutY="183.0" nodeOrientation="INHERIT" onDragOver="#startButton" onMouseClicked="#startButton" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Start%20button.png" />
          </image>
