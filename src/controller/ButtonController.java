@@ -29,6 +29,7 @@ public class ButtonController {
 		private Text monsterHealth;
 		@FXML
 		private TextArea armorPointsTextBox;
+		
 		@FXML
 		private Button button00; 	
 		@FXML
@@ -52,7 +53,8 @@ public class ButtonController {
 		@FXML
 		private Button button22; 	
 		@FXML
-		private Button button23; 	
+		private Button button23; 
+		
 	//end code folding - will add later java doesn't support it natively like C does
 		
 		public int clickedCount = 0; //tally of how many times a button has been pressed;
@@ -60,6 +62,7 @@ public class ButtonController {
 		public int attackPoints = 3; //default attack points
 		public int monsterHitPoints = 5; //default enemy health
 		private static Stage origStage;
+		private static int number =7;
 		/* create Start class object called pressedButton*/
 		Start pressedButton = new Start();
 		Menu menuButton = new Menu();
@@ -68,8 +71,9 @@ public class ButtonController {
 		/*
 		 * this function grabs the primary stage from the Main.java
 		 */
-		public void getStage(Stage primaryStage) {
+		public void getStage(Stage primaryStage, int num) {
 			origStage = primaryStage;
+			number = num;
 		}
 		
 		/*
@@ -78,7 +82,7 @@ public class ButtonController {
 		 */
 		public void startButton(ActionEvent event)throws IOException{
 			//Start pressedButton = new Start();			
-			pressedButton.openWindow(origStage);						
+			pressedButton.openWindow(origStage, number);						
 		}
 		/*
 		 * This function is called on the gameplay screen to go back to the main menu
@@ -105,10 +109,10 @@ public class ButtonController {
 			 * using this eventually to check location of the button pressed
 			 * and then only allow buttons next to it to be pressed
 			*/
-			String buttonCollumn = id.substring(id.length() - 1);
+			String buttonColumn = id.substring(id.length() - 1);
 			String buttonRow	 = id.substring(id.length() - 2);
 			int row = Integer.parseInt(buttonRow);
-			int collumn = Integer.parseInt(buttonCollumn);
+			int column = Integer.parseInt(buttonColumn);
 			
 			randomValue = (int)Math.floor(Math.random()*(max-min+1)+min); //generate random value
 			System.out.println("Random value is : " + randomValue); //print the random value
@@ -171,7 +175,4 @@ public class ButtonController {
 			}
 			monsterHealth.setText(String.valueOf(monsterHitPoints));
 		}
-		
-		
-		
 }

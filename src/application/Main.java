@@ -1,5 +1,6 @@
 package application;
 	
+import controller.ButtonController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -18,12 +19,18 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//load the fxml file
+			ButtonController send = new ButtonController();
+			//int num = 5;
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Mainview.fxml"));
 			//set the scene to scenebuilder
 			Scene scene = new Scene(root,700,724);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			send.getStage(primaryStage, 5);
+			
+			//send.getStage(primaryStage, 5);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class Start{
 	
-	public void openWindow(Stage origStage) {
+	public void openWindow(Stage origStage, int num) {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("/view/gamePlay.fxml"));
 				//set the scene to scenebuilder

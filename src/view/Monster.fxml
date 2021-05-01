@@ -11,7 +11,7 @@
    <children>
       <ImageView accessibleRole="BUTTON" fitHeight="398.0" fitWidth="420.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/these/Documents/GitHub/Dicey-Dungeon/images/MonsterPlaceholder.png" />
+            <Image url="@../../images/MonsterPlaceholder.png" />
          </image>
       </ImageView>
       <Button fx:id="attackButton" layoutX="43.0" layoutY="329.0" mnemonicParsing="false" onAction="#attack" prefHeight="50.0" prefWidth="77.0" text="Attack" />
