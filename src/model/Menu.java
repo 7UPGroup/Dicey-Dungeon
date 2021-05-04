@@ -3,7 +3,7 @@ package model;
 import java.awt.Button;
 import java.awt.Insets;
 
-import controller.ButtonController;
+import controller.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

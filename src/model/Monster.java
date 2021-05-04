@@ -1,5 +1,5 @@
 package model;
-import controller.ButtonController;
+import controller.GameController;
 import controller.MonsterController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.awt.Button;
 import java.awt.Insets;
-import controller.ButtonController;
+import controller.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
@@ -26,13 +26,14 @@ import java.io.IOException;
  * but just a warning... abie just do it the way you did the other images
  */
 public class Monster{
-	public void openWindow(Stage origStage, int armor, int weaponID, ButtonController scene1Controller) {
+	public void openWindow(Stage origStage, int armor, int weaponID, GameController scene1Controller) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Monster.fxml"));
 			Parent root = loader.load();						
 			MonsterController scene2Controller = loader.getController();
 
-			scene2Controller.transferArmor(armor); //set the players armor		
+			scene2Controller.transferArmor(armor); //set the players armor
+			//scene2Controller.
 			scene2Controller.transferController(scene1Controller); //send the ButtonController of gameplay.FXML
 							
 			Stage monsterStage = new Stage();

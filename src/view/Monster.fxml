@@ -21,14 +21,24 @@
             <Font size="9.0" />
          </font>
       </Button>
-      <Text fx:id="monsterHealth" fill="WHITE" layoutX="143.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health">
+      <Text fx:id="monsterHealth" fill="WHITE" layoutX="181.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="playerHealth" fill="WHITE" layoutX="14.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Health">
+      <Text fx:id="playerHealth" fill="WHITE" layoutX="14.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Health" wrappingWidth="240.22314453125">
          <font>
             <Font size="47.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="91.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monster Health:">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Health:">
+         <font>
+            <Font size="38.0" />
          </font>
       </Text>
    </children>

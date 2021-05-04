@@ -34,7 +34,7 @@ public class MonsterController {
 	
 	public int attackPoints = 3; //default attack point
 	
-	public static ButtonController ControllerScene1 = new ButtonController(); //use this variable to edit gamePlay window
+	public static GameController ControllerScene1 = new GameController(); //use this variable to edit gamePlay window
 		
 	public void transferArmor(int armorVal) {
 		armorPoints = armorVal;
@@ -42,7 +42,7 @@ public class MonsterController {
 		playerHealth.setText(String.valueOf(armorPoints));
 	}
 
-	public void transferController(ButtonController Scene1Controller) {
+	public void transferController(GameController Scene1Controller) {
 		System.out.println("Setting controller");
 		ControllerScene1 = Scene1Controller;
 	}	
@@ -67,28 +67,42 @@ public class MonsterController {
 						
 		System.out.println("Attack Button Pressed");
 		int min2 = 1; int max2 = 3;
-		int randomValue2 = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
+		int randomValue2 = 100; //(int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
 		System.out.println("Random value is : " + randomValue2); //print the random value
 		
 		Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
 		String id = btn.getId(); //String id = fx:id of button pressed
 		attackButton.setStyle("-fx-background-color: #FF0000"); //RED - make attack button red
-		System.out.println(id + " PRESSED");		
+		System.out.println(id + " PRESSED");
+		
 		monsterHitPoints -= attackPoints;
+		
+	    Stage CurrentStage = (Stage) btn.getScene().getWindow();
 			
-		if (monsterHitPoints <= 0) {
+		if (monsterHitPoints <= 0 && armorPoints >= 1) {
 			System.out.println("Monster Defeated");
-		    Stage CurrentStage = (Stage) btn.getScene().getWindow();
 
 		    ControllerScene1.setarmorPoints(armorPoints);
 		    ControllerScene1.updatearmorPointsTextBox(armorPoints);
 		    
 		    CurrentStage.close();
 		}
-		armorPoints -= randomValue2;
 		
-		monsterHealth.setText(String.valueOf(monsterHitPoints));
-		showarmorPoints(armorPoints);
+		armorPoints -= randomValue2; //subtracting monster attack from armor
+		
+		if (armorPoints <= 0) {
+			System.out.println("Monster defeated you aka you died");
+			ControllerScene1.updateResults("Monster defeated you aka you died");
+			CurrentStage.close();
+			ControllerScene1.setarmorPoints(0);
+		    ControllerScene1.updatearmorPointsTextBox(0);
+		}
+
+		if (armorPoints >= 1) {
+			monsterHealth.setText(String.valueOf(monsterHitPoints));
+			showarmorPoints(armorPoints);
+		}
+		
 	}
 }
 

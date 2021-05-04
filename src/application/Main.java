@@ -1,6 +1,6 @@
 package application;
 	
-import controller.ButtonController;
+import controller.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -19,7 +19,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//load the fxml file
-			ButtonController send = new ButtonController();
+			GameController send = new GameController();
 			//int num = 5;
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Mainview.fxml"));
 			//set the scene to scenebuilder

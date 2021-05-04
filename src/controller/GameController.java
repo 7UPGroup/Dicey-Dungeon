@@ -17,7 +17,7 @@ import model.Start;
 import model.Menu;
 import model.Monster;
 
-public class ButtonController {
+public class GameController {
 	//start code folding - will add later java doesn't support it natively like C does
 
 		@FXML
@@ -100,6 +100,10 @@ public class ButtonController {
 			System.out.println("Return to Menu button pressed");								
 			menuButton.openWindow(origStage);			
 		}
+		
+		public void updateResults(String msg) {
+			results.setText(String.valueOf(msg));
+		}
 		/*
 		 * function to handle when the user presses a button on the grid
 		 */
@@ -133,7 +137,7 @@ public class ButtonController {
 			if (randomValue == 1) { //adjust this and the min/max statements to change likelihood of an option
 				updatearmorPointsTextBox(armorPoints);
 				btn.setStyle("-fx-background-color: #F6FF64"); //YELLOW - TREASURE
-				results.setText(String.valueOf("CONGRATS! YOU'VE FOUND TREASURE... +1 ARMOR"));
+				updateResults("CONGRATS! YOU'VE FOUND TREASURE... +1 ARMOR");
 				armorPoints++; //add 1 armor point
 				//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
 				updatearmorPointsTextBox(armorPoints);
@@ -143,7 +147,7 @@ public class ButtonController {
 				//results.setText(String.valueOf("YOU'VE ENCOUNTERED AN ENEMY!... -1 ARMOR"));
 				//armorPoints--; //minus 1 armor point				
 				/*
-				 * OPEN ENEMY ENCOUNTER WINDOW... 
+				 * OPEN ENEMY ENCOUNTER WINDOW...
 				 * see attack and block actionEvent handler function below
 				 */
 				//armorPoints--;
@@ -163,7 +167,7 @@ public class ButtonController {
 			else if (randomValue == 3) { 
 				updatearmorPointsTextBox(armorPoints);				
 				btn.setStyle("-fx-background-color: #FFFFFF"); //WHITE - NOTHING/BLANK TILE
-				results.setText(String.valueOf("EMPTY AREA..."));
+				updateResults("EMPTY AREA...");
 			}
 
 			updatearmorPointsTextBox(armorPoints);
