@@ -14,14 +14,19 @@
             <Image url="@../../images/MonsterPlaceholder.png" />
          </image>
       </ImageView>
-      <Button fx:id="attackButton" layoutX="43.0" layoutY="329.0" mnemonicParsing="false" onAction="#attack" prefHeight="50.0" prefWidth="77.0" text="Attack" />
-      <Button fx:id="blockButton" layoutX="172.0" layoutY="329.0" mnemonicParsing="false" onAction="#block" prefHeight="50.0" prefWidth="77.0" text="Block" />
+      <Button fx:id="attackButton" layoutX="14.0" layoutY="219.0" mnemonicParsing="false" onAction="#attack" prefHeight="50.0" prefWidth="77.0" text="Attack" />
+      <Button fx:id="blockButton" layoutX="329.0" layoutY="219.0" mnemonicParsing="false" onAction="#block" prefHeight="50.0" prefWidth="77.0" text="Block" />
       <Button layoutX="265.0" layoutY="329.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="136.0" text="ChangeToTextBoxForDialogue">
          <font>
             <Font size="9.0" />
          </font>
       </Button>
       <Text fx:id="monsterHealth" fill="WHITE" layoutX="143.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health">
+         <font>
+            <Font size="47.0" />
+         </font>
+      </Text>
+      <Text fx:id="playerHealth" fill="WHITE" layoutX="14.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Health">
          <font>
             <Font size="47.0" />
          </font>

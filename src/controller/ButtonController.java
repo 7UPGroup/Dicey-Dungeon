@@ -20,6 +20,8 @@ import model.Monster;
 public class ButtonController {
 	//start code folding - will add later java doesn't support it natively like C does
 		@FXML
+		private Text playerHealth;
+		@FXML
 		private Button attackButton;
 		@FXML
 		private Button blockButton;		
@@ -29,7 +31,12 @@ public class ButtonController {
 		private Text monsterHealth;
 		@FXML
 		private TextArea armorPointsTextBox;
-		
+		public void updatearmorPointsTextBox(int num) {
+			armorPointsTextBox.setText(String.valueOf("Armor: " + num));
+		}
+		public void sendArmorAfterFight(int num) {
+			updatearmorPointsTextBox(num);
+		}
 		@FXML
 		private Button button00; 	
 		@FXML
@@ -58,8 +65,17 @@ public class ButtonController {
 	//end code folding - will add later java doesn't support it natively like C does
 		
 		public int clickedCount = 0; //tally of how many times a button has been pressed;
-		public int armorPoints = 3; //default value for armor points
 		public int attackPoints = 3; //default attack points
+		
+		
+		public int armorPoints = 3; //default value for armor points
+		public void setarmorPoints(int val) {
+			this.armorPoints = val;
+		}
+		public void showarmorPoints(int val) {
+			playerHealth.setText(String.valueOf(armorPoints));
+		}
+		
 		public int monsterHitPoints = 5; //default enemy health
 		private static Stage origStage;
 		private static int number =7;
@@ -95,6 +111,8 @@ public class ButtonController {
 		 * function to handle when the user presses a button on the grid
 		 */
 		public void gridButtonPressed(ActionEvent event)throws IOException{
+			//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
+			updatearmorPointsTextBox(armorPoints);
 			int min = 1; //inclusive min value adjust these and the if statements to change likelyhood of an option 
 			int max = 3; //inclusive max value
 			int randomValue = 0;			
@@ -116,9 +134,7 @@ public class ButtonController {
 			
 			randomValue = (int)Math.floor(Math.random()*(max-min+1)+min); //generate random value
 			System.out.println("Random value is : " + randomValue); //print the random value
-			
-			
-			
+						
 			/* Disables btn from being pressed again but makes color lighter unfortunately */
 			btn.setDisable(true); 
 			
@@ -126,17 +142,22 @@ public class ButtonController {
 				btn.setStyle("-fx-background-color: #F6FF64"); //YELLOW - TREASURE
 				results.setText(String.valueOf("CONGRATS! YOU'VE FOUND TREASURE... +1 ARMOR"));
 				armorPoints++; //add 1 armor point
+				//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
+				updatearmorPointsTextBox(armorPoints);
 			}
 			else if (randomValue == 2) { 
 				btn.setStyle("-fx-background-color: #FF0000"); //RED - ENEMY
-				results.setText(String.valueOf("YOU'VE ENCOUNTERED AN ENEMY!... -1 ARMOR"));
-				armorPoints--; //minus 1 armor point
-				
+				//results.setText(String.valueOf("YOU'VE ENCOUNTERED AN ENEMY!... -1 ARMOR"));
+				//armorPoints--; //minus 1 armor point				
 				/*
 				 * OPEN ENEMY ENCOUNTER WINDOW... 
 				 * see attack and block actionEvent handler function below
 				 */
-				monsterEvent.openWindow(origStage);		
+				//armorPoints--;
+				int weaponIDplaceholder = 0;
+				
+				armorPoints = monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder);
+				updatearmorPointsTextBox(armorPoints);
 								
 			}
 			else if (randomValue == 3) { 
@@ -146,7 +167,8 @@ public class ButtonController {
 			}
 			
 			//results.setText(String.valueOf(clickedCount)); //print clickedCount in textField "results"
-			armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
+			//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
+			updatearmorPointsTextBox(armorPoints);
 		}		
 		/*
 		 * called when block button is pressed in the monster fight window
@@ -161,6 +183,13 @@ public class ButtonController {
 		 * called when attack button is pressed in the monster fight window
 		 */
 		public void attack(ActionEvent event)throws IOException{
+			System.out.println("Monster Attacked");
+			int min2 = 1; int max2 = 3;
+			int randomValue2 = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
+			System.out.println("Random value is : " + randomValue2); //print the random value
+			armorPoints -= randomValue2;
+			showarmorPoints(armorPoints);
+			
 			Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
 			String id = btn.getId(); //String id = fx:id of button pressed
 			attackButton.setStyle("-fx-background-color: #FF0000"); //RED - make attack button red
@@ -171,8 +200,17 @@ public class ButtonController {
 				// get a handle to the stage
 			    Stage CurrentStage = (Stage) btn.getScene().getWindow();
 			    // close stage
+			    //pressedButton.openWindow(origStage, number);	
 			    CurrentStage.close();
+			    //updatearmorPointsTextBox(armorPoints);
 			}
 			monsterHealth.setText(String.valueOf(monsterHitPoints));
+			/*
+			 * This is where we have the monster attack
+			 */
+			
+			//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
+			//sendArmorAfterFight(armorPoints);
+			//updatearmorPointsTextBox(armorPoints);
 		}
 }
