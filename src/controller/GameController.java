@@ -149,21 +149,19 @@ public class GameController {
 						
 			/* Disables btn from being pressed again but makes color lighter unfortunately */
 			btn.setDisable(true); 
-			totalClicks++;
 			
-			if (totalClicks == 12) {
-				EndScreen winScreen = new EndScreen();
-				winScreen.openWinWindow(origStage);
-			}
+			
+			
 			//need to fix the last square when fighting a monster
 			
 			if (randomValue == 1) { //adjust this and the min/max statements to change likelihood of an option
 				updatearmorPointsTextBox(armorPoints);
 				btn.setStyle("-fx-background-color: #F6FF64"); //YELLOW - TREASURE
-				updateResults("CONGRATS! YOU'VE FOUND TREASURE... +1 ARMOR");
+				updateResults("CONGRATS! YOU'VE FOUND TREASURE... \n+1 ARMOR");
 				armorPoints++; //add 1 armor point
 				//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
 				updatearmorPointsTextBox(armorPoints);
+				totalClicks++;
 			}
 			
 			else if (randomValue == 2) { 
@@ -186,13 +184,21 @@ public class GameController {
 				int ranMonHealth = (int)Math.floor(Math.random()*(5-4+1)+4);
 				monsterEvent.openWindow(origStage, armorPoints, ranMonHealth, this);
 				System.out.println("opened window");
+				
 				updatearmorPointsTextBox(armorPoints);
+				totalClicks++;
 								
 			}
 			else if (randomValue == 3) { 
 				updatearmorPointsTextBox(armorPoints);				
 				btn.setStyle("-fx-background-color: #FFFFFF"); //WHITE - NOTHING/BLANK TILE
 				updateResults("EMPTY AREA...");
+				totalClicks++;
+			}
+			
+			if (totalClicks == 12) {
+				EndScreen winScreen = new EndScreen();
+				winScreen.openWinWindow(origStage);
 			}
 
 			updatearmorPointsTextBox(armorPoints);

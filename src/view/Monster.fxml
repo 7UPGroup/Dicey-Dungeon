@@ -10,19 +10,29 @@
 
 <Pane prefHeight="398.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MonsterController">
    <children>
-      <ImageView accessibleRole="BUTTON" fitHeight="398.0" fitWidth="420.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="354.0" fitWidth="420.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/MonsterPlaceholder.png" />
+            <Image url="@../../images/blackscreen.jpeg" />
          </image>
       </ImageView>
-      <Button fx:id="attackButton" layoutX="14.0" layoutY="219.0" mnemonicParsing="false" onAction="#attack" prefHeight="50.0" prefWidth="77.0" text="Attack" />
-      <Button fx:id="blockButton" layoutX="329.0" layoutY="219.0" mnemonicParsing="false" onAction="#block" prefHeight="50.0" prefWidth="77.0" text="Block" />
-      <Text fx:id="monsterHealth" fill="WHITE" layoutX="157.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health">
+      <ImageView fitHeight="354.0" fitWidth="420.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/blackscreen.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="205.0" fitWidth="207.0" layoutX="91.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/goblin.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="attackButton" layoutX="14.0" layoutY="203.0" mnemonicParsing="false" onAction="#attack" prefHeight="50.0" prefWidth="77.0" text="Attack" />
+      <Button fx:id="blockButton" layoutX="315.0" layoutY="203.0" mnemonicParsing="false" onAction="#block" prefHeight="50.0" prefWidth="77.0" text="Dodge" />
+      <Text fx:id="monsterHealth" fill="WHITE" layoutX="196.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health">
          <font>
             <Font size="47.0" />
          </font>
       </Text>
-      <Text fx:id="playerHealth" fill="WHITE" layoutX="135.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Health" wrappingWidth="150.70703125">
+      <Text fx:id="playerHealth" fill="WHITE" layoutX="139.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8" wrappingWidth="142.0">
          <font>
             <Font size="47.0" />
          </font>
@@ -32,11 +42,39 @@
             <Font size="38.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="14.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Health:" wrappingWidth="127.70703125">
+      <Text fill="WHITE" layoutX="14.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Health:" wrappingWidth="127.70703125">
          <font>
             <Font size="38.0" />
          </font>
       </Text>
-      <TextArea fx:id="monsterDialogue" layoutX="261.0" layoutY="304.0" prefHeight="87.0" prefWidth="142.0" />
+      <TextArea fx:id="monsterDialogue" layoutX="179.0" layoutY="284.0" prefHeight="87.0" prefWidth="234.0">
+         <font>
+            <Font size="10.0" />
+         </font></TextArea>
+      <Text fx:id="playerHealth1" fill="#2f942c" layoutX="123.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monster deals 1, 2 or 3 damage" wrappingWidth="142.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Text fx:id="playerHealth11" fill="#dd402e" layoutX="14.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack with 3" wrappingWidth="142.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="playerHealth12" fill="#47b6fc" layoutX="305.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodge full attack" wrappingWidth="142.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="playerHealth121" fill="WHITE" layoutX="273.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actions" wrappingWidth="142.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="playerHealth122" fill="#47b6fc" layoutX="304.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or take full attack" wrappingWidth="142.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

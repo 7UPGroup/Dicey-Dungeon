@@ -17,7 +17,7 @@ public class Menu{
 		try {
 
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Mainview.fxml"));
-			Scene scene = new Scene(root,700,724);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			origStage.setScene(scene);
 			origStage.show();

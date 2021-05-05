@@ -20,7 +20,7 @@ public class EndScreen{
 	public void openWinWindow(Stage origStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/WinEndScreen.fxml"));
-			Scene scene = new Scene(root,700,724);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());						
 			origStage.setScene(scene);
 			origStage.show();
@@ -35,7 +35,7 @@ public class EndScreen{
 			GameController scene2Controller = loader.getController();
 			scene2Controller.updateLoseScreenText("Monster dealt " + damage + " damage and you only had " + val + " left"); //set the players armor
 
-			Scene scene = new Scene(root,700,724);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 									
 			origStage.setScene(scene);

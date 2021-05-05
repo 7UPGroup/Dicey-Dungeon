@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <Text layoutX="120.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU LOST :)!!" wrappingWidth="360.21630859375">
+      <ImageView fitHeight="121.0" fitWidth="510.0" layoutX="62.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/You%20Lose.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="249.0" layoutY="193.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
+      <Text fx:id="loseScreenText" layoutX="68.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU LOST :)!!" wrappingWidth="498.21630859375">
          <font>
-            <Font size="56.0" />
-         </font>
-      </Text>
-      <Button layoutX="249.0" layoutY="234.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-      <Text fx:id="loseScreenText" layoutX="126.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU LOST :)!!" wrappingWidth="360.21630859375">
-         <font>
-            <Font size="56.0" />
+            <Font size="30.0" />
          </font>
       </Text>
    </children>

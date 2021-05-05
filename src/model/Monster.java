@@ -36,7 +36,7 @@ public class Monster{
 			//makes main game area unaccessible till monster window is closed.
 			monsterStage.initModality(Modality.APPLICATION_MODAL); 
 			monsterStage.setTitle("Monster Battle!");			
-			Scene scene = new Scene(root,700,724);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			monsterStage.setScene(scene);
 			monsterStage.show();			

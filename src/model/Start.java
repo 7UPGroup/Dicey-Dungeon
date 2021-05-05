@@ -16,7 +16,7 @@ public class Start{
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("/view/gamePlay.fxml"));
 				//set the scene to scenebuilder
-				Scene scene = new Scene(root,700,724);
+				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				origStage.setScene(scene);
 				origStage.show();
