@@ -22,6 +22,12 @@ public class GameController {
 	//start code folding - will add later java doesn't support it natively like C does
 
 		@FXML
+		private Text loseScreenText;
+		public void updateLoseScreenText(String Text) {
+			loseScreenText.setText(Text);
+		}
+	
+		@FXML
 		private TextArea results;
 
 		@FXML

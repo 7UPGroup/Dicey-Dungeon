@@ -19,7 +19,6 @@ import model.Menu;
 import model.Monster;
 
 public class MonsterController {
-
 	@FXML
 	private Text playerHealth;
 	@FXML
@@ -39,6 +38,12 @@ public class MonsterController {
 	
 	public static GameController ControllerScene1 = new GameController(); //use this variable to edit gamePlay window
 		
+	public void returnToMenu(ActionEvent event)throws IOException{
+		System.out.println("Return to Menu button pressed");								
+		
+		//menuButton.openWindow(origStage);			
+	}
+	
 	public void transferEnemyInitialHealth(int initialMonsterHealth) {
 		monsterHitPoints = initialMonsterHealth;
 		monsterHealth.setText(String.valueOf(monsterHitPoints));
@@ -75,7 +80,7 @@ public class MonsterController {
 		System.out.println("Attack Button Pressed");
 		int min2 = 1; int max2 = 3;
 		int randomValue2 = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
-		System.out.println("Random value is : " + randomValue2); //print the random value
+		System.out.println("Random Monster Attack: " + randomValue2); //print the random value
 		
 		Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
 		String id = btn.getId(); //String id = fx:id of button pressed
@@ -89,13 +94,11 @@ public class MonsterController {
 			
 		if (monsterHitPoints <= 0 && armorPoints >= 1) {
 			System.out.println("Monster Defeated");
-
 		    ControllerScene1.setarmorPoints(armorPoints);
-		    ControllerScene1.updatearmorPointsTextBox(armorPoints);
-		    
+		    ControllerScene1.updatearmorPointsTextBox(armorPoints);		    
 		    CurrentStage.close();
 		}
-		
+		int beforeAttack = armorPoints;
 		armorPoints -= randomValue2; //subtracting monster attack from armor
 		monsterDialogue.appendText("You took " + randomValue2 + " damage!\n");
 		
@@ -105,14 +108,10 @@ public class MonsterController {
 			CurrentStage.close();
 			ControllerScene1.setarmorPoints(0);
 		    ControllerScene1.updatearmorPointsTextBox(0);
+		    	
+		    EndScreen loseScreen = new EndScreen();	
 		    //make end screen appear	
-		    EndScreen loseScreen = new EndScreen();
-		    
-		    
-		    loseScreen.openLoseWindow(ControllerScene1.returnStage());
-		    
-		    //ControllerScene1.returnToMenu(null); //closes all windows and brings you back to main menu
-		    //ControllerScene1.showEndScreen(null);
+		    loseScreen.openLoseWindow(ControllerScene1.returnStage(), beforeAttack, randomValue2);//, randomValue2, ControllerScene1);
 		}
 
 		if (armorPoints >= 1) {

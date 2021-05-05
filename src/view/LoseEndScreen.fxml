@@ -13,5 +13,10 @@
          </font>
       </Text>
       <Button layoutX="249.0" layoutY="234.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
+      <Text fx:id="loseScreenText" layoutX="126.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU LOST :)!!" wrappingWidth="360.21630859375">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
