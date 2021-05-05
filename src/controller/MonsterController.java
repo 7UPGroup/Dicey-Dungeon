@@ -108,6 +108,7 @@ public class MonsterController {
 		    //make end screen appear	
 		    EndScreen loseScreen = new EndScreen();
 		    
+		    
 		    loseScreen.openLoseWindow(ControllerScene1.returnStage());
 		    
 		    //ControllerScene1.returnToMenu(null); //closes all windows and brings you back to main menu

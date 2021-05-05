@@ -55,6 +55,7 @@ public class GameController {
 		@FXML
 		private Button button23; 
 		
+		
 	//end code folding - will add later java doesn't support it natively like C does
 		
 		public int attackPoints = 3; //default attack points
@@ -142,6 +143,13 @@ public class GameController {
 						
 			/* Disables btn from being pressed again but makes color lighter unfortunately */
 			btn.setDisable(true); 
+			totalClicks++;
+			
+			if (totalClicks == 12) {
+				EndScreen winScreen = new EndScreen();
+				winScreen.openWinWindow(origStage);
+			}
+			//need to fix the last square when fighting a monster
 			
 			if (randomValue == 1) { //adjust this and the min/max statements to change likelihood of an option
 				updatearmorPointsTextBox(armorPoints);
@@ -151,6 +159,7 @@ public class GameController {
 				//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
 				updatearmorPointsTextBox(armorPoints);
 			}
+			
 			else if (randomValue == 2) { 
 				btn.setStyle("-fx-background-color: #FF0000"); //RED - ENEMY
 				//results.setText(String.valueOf("YOU'VE ENCOUNTERED AN ENEMY!... -1 ARMOR"));
@@ -160,7 +169,6 @@ public class GameController {
 				 * see attack and block actionEvent handler function below
 				 */
 				//armorPoints--;
-				int weaponIDplaceholder = 0;
 				System.out.println("About to open window");
 				//monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder);
 				
@@ -169,7 +177,8 @@ public class GameController {
 				//monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder, menuButton);
 				//test
 				System.out.println("Test");
-				monsterEvent.openWindow(origStage, armorPoints, 5, this);
+				int ranMonHealth = (int)Math.floor(Math.random()*(5-4+1)+4);
+				monsterEvent.openWindow(origStage, armorPoints, ranMonHealth, this);
 				System.out.println("opened window");
 				updatearmorPointsTextBox(armorPoints);
 								
@@ -181,11 +190,8 @@ public class GameController {
 			}
 
 			updatearmorPointsTextBox(armorPoints);
-			totalClicks++;
-			if (totalClicks == 12) {
-				EndScreen winScreen = new EndScreen();
-				winScreen.openWinWindow(origStage);
-			}
+			
+			
 		}
 }
 
