@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.Start;
+import model.EndScreen;
 import model.Menu;
 import model.Monster;
 
@@ -58,6 +59,7 @@ public class GameController {
 		
 		public int attackPoints = 3; //default attack points
 		
+		public int totalClicks = 0;
 		
 		public int armorPoints = 3; //default value for armor points
 		public void setarmorPoints(int val) {
@@ -71,6 +73,11 @@ public class GameController {
 		*/
 		public int monsterHitPoints = 5; //default enemy health
 		private static Stage origStage;
+		public Stage returnStage() {
+			return origStage;
+		}
+		
+		
 		private static int number =7;
 		/* create Start class object called pressedButton*/
 		Start pressedButton = new Start();
@@ -109,6 +116,8 @@ public class GameController {
 		 */
 		public void gridButtonPressed(ActionEvent event)throws IOException{
 			//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
+			
+			
 			updatearmorPointsTextBox(armorPoints);
 			int min = 1; //inclusive min value adjust these and the if statements to change likelyhood of an option 
 			int max = 3; //inclusive max value
@@ -159,7 +168,7 @@ public class GameController {
 				
 				//monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder, menuButton);
 				
-				monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder, this);
+				monsterEvent.openWindow(origStage, armorPoints, 5, this);
 				System.out.println("opened window");
 				updatearmorPointsTextBox(armorPoints);
 								
@@ -171,6 +180,11 @@ public class GameController {
 			}
 
 			updatearmorPointsTextBox(armorPoints);
+			totalClicks++;
+			if (totalClicks == 12) {
+				EndScreen winScreen = new EndScreen();
+				winScreen.openWinWindow(origStage);
+			}
 		}
 }
 

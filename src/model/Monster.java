@@ -21,19 +21,15 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-/*
- * goblin image only showing if i use absolute path, not sure if this will cause issue
- * but just a warning... abie just do it the way you did the other images
- */
 public class Monster{
-	public void openWindow(Stage origStage, int armor, int weaponID, GameController scene1Controller) {
+	public void openWindow(Stage origStage, int armor, int enemyInitialHealth, GameController scene1Controller) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Monster.fxml"));
 			Parent root = loader.load();						
 			MonsterController scene2Controller = loader.getController();
 
 			scene2Controller.transferArmor(armor); //set the players armor
-			//scene2Controller.
+			scene2Controller.transferEnemyInitialHealth(enemyInitialHealth);
 			scene2Controller.transferController(scene1Controller); //send the ButtonController of gameplay.FXML
 							
 			Stage monsterStage = new Stage();
