@@ -15,12 +15,35 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.Start;
 import model.EndScreen;
+import model.HowTo;
 import model.Menu;
 import model.Monster;
 
 public class GameController {
 	//start code folding - will add later java doesn't support it natively like C does
-
+		@FXML
+		private Button returnToMenu;
+		@FXML
+		private Button startButton;
+		
+		
+		@FXML
+		private Button howToPlayButton;
+		public void openHowToWindow(ActionEvent event) {
+			try {
+				HowTo howToWindow = new HowTo();
+				howToWindow.openWindow(origStage);
+			}
+			catch(Exception e) {
+				System.out.println("Couldn't load how to window");
+			}
+		}
+		public void closeHowToWindow(ActionEvent event) {
+			Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
+		    Stage CurrentStage = (Stage) btn.getScene().getWindow();
+		    CurrentStage.close();
+		}
+		
 		@FXML
 		private Text loseScreenText;
 		public void updateLoseScreenText(String Text) {
@@ -132,7 +155,7 @@ public class GameController {
 			
 			Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
 			String id = btn.getId(); //String id = fx:id of button pressed
-			System.out.println(id + " PRESSED");
+			System.out.print(id + " PRESSED");
 			System.out.println("Grid button was pressed");	
 			
 			/*
@@ -145,7 +168,7 @@ public class GameController {
 			int column = Integer.parseInt(buttonColumn);
 			
 			randomValue = (int)Math.floor(Math.random()*(max-min+1)+min); //generate random value
-			System.out.println("Random value is : " + randomValue); //print the random value
+			System.out.println("Random Event Value: " + randomValue); //print the random value
 						
 			/* Disables btn from being pressed again but makes color lighter unfortunately */
 			btn.setDisable(true); 
