@@ -167,7 +167,8 @@ public class GameController {
 				
 				
 				//monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder, menuButton);
-				
+				//test
+				System.out.println("Test");
 				monsterEvent.openWindow(origStage, armorPoints, 5, this);
 				System.out.println("opened window");
 				updatearmorPointsTextBox(armorPoints);
