@@ -3,6 +3,7 @@ package model;
 import java.awt.Button;
 import java.awt.Insets;
 
+import controller.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -12,9 +13,12 @@ import javafx.scene.layout.VBox;
 
 public class Start{
 	
-	public void openWindow(Stage origStage, int num) {
+	public void openWindow(Stage origStage) {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/view/gamePlay.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/gamePlay.fxml"));
+				Parent root = loader.load();
+				GameController intializeArmorPoints = loader.getController();
+				intializeArmorPoints.updatearmorPointsTextBox(3);
 				//set the scene to scenebuilder
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

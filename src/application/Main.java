@@ -20,16 +20,14 @@ public class Main extends Application {
 		try {
 			//load the fxml file
 			GameController send = new GameController();
-			//int num = 5;
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Mainview.fxml"));
 			//set the scene to scenebuilder
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();			
-			send.getStage(primaryStage, 5);
+			send.getStage(primaryStage);
 			
-			//send.getStage(primaryStage, 5);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

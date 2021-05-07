@@ -24,7 +24,7 @@ public class MonsterController {
 	@FXML
 	private Button attackButton;
 	@FXML
-	private Button blockButton;		
+	private Button dodgeButton;		
 	@FXML
 	private Text monsterHealth;
 	@FXML
@@ -64,32 +64,32 @@ public class MonsterController {
 	}
 	
 	/*
-	 * called when block button is pressed in the monster fight window
+	 * called when dodge button is pressed in the monster fight window
 	 */
-	public void block(ActionEvent event)throws IOException{
+	public void dodge(ActionEvent event)throws IOException{
 		Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
 		String id = btn.getId(); //String id = fx:id of button pressed
 		System.out.println(id + " PRESSED");	
-		blockButton.setStyle("-fx-background-color: #009EFF"); //LIGHT BLUE - make block button blue
+		dodgeButton.setStyle("-fx-background-color: #009EFF"); //LIGHT BLUE - make block button blue
 		
 		/* 
 		 * random value for monster attacks and blocked 
 		*/
 		int min2 = 1; int max2 = 3;
 		int monsterAttack = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
-		int blockedOrNot = (int)Math.floor(Math.random()*(2-1+1)+1);
+		int dodgeOrNot = (int)Math.floor(Math.random()*(2-1+1)+1);
 		System.out.println("Random Monster Attack: " + monsterAttack); //print the random value
 		
 		//subtract 1 from monsterAttack
-		if (blockedOrNot == 1) {
+		if (dodgeOrNot == 1) {
 			monsterHitPoints -= 1;
 			//userReads = "You dealt " + attackPoints + " damage!\n";
-			monsterDialogue.setText("You blocked " + monsterAttack + " damage from monster\n");
+			monsterDialogue.setText("You dodged " + monsterAttack + " damage from monster\n");
 			monsterDialogue.appendText("Monster loses 1 damage from falling\n");
 		}
-		else if (blockedOrNot == 2){
+		else if (dodgeOrNot == 2){
 			armorPoints -= monsterAttack;
-			monsterDialogue.setText("You blocked 0 damage from monster\n");
+			monsterDialogue.setText("You didn't move in time from the monster!\n");
 			monsterDialogue.appendText("You took " + monsterAttack + " damage!\n");
 		}
 		
@@ -107,8 +107,9 @@ public class MonsterController {
 		if (armorPoints <= 0 && monsterHitPoints >= 0) {
 			ControllerScene1.updateResults("Monster killed you");
 			CurrentStage.close();
-			ControllerScene1.setarmorPoints(0);
-		    ControllerScene1.updatearmorPointsTextBox(0);
+			armorPoints = 0;
+			ControllerScene1.setarmorPoints(armorPoints);
+		    ControllerScene1.updatearmorPointsTextBox(armorPoints);
 		    	
 		    EndScreen loseScreen = new EndScreen();	
 		    //make end screen appear	

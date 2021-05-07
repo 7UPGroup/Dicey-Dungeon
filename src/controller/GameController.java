@@ -20,36 +20,26 @@ import model.Menu;
 import model.Monster;
 
 public class GameController {
-	//start code folding - will add later java doesn't support it natively like C does
+	/**
+	 * FXML buttons and text boxes for main menu and game windows
+	 */
 		@FXML
 		private Button returnToMenu;
 		@FXML
 		private Button startButton;
-		
-		
 		@FXML
 		private Button howToPlayButton;
-		public void openHowToWindow(ActionEvent event) {
-			try {
-				HowTo howToWindow = new HowTo();
-				howToWindow.openWindow(origStage);
-			}
-			catch(Exception e) {
-				System.out.println("Couldn't load how to window");
-			}
-		}
-		public void closeHowToWindow(ActionEvent event) {
-			Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
-		    Stage CurrentStage = (Stage) btn.getScene().getWindow();
-		    CurrentStage.close();
-		}
-		
 		@FXML
 		private Text loseScreenText;
 		public void updateLoseScreenText(String Text) {
 			loseScreenText.setText(Text);
 		}
-	
+		
+		@FXML
+		private Text winScreenText;
+		public void updateWinScreenText(String Text) {
+			winScreenText.setText(Text);
+		}
 		@FXML
 		private TextArea results;
 
@@ -84,8 +74,29 @@ public class GameController {
 		@FXML
 		private Button button23; 
 		
+		/**
+		 * Opening the how to window in main screen
+		 * @param event button event
+		 */
+		public void openHowToWindow(ActionEvent event) {
+			try {
+				HowTo howToWindow = new HowTo();
+				howToWindow.openWindow(origStage);
+			}
+			catch(Exception e) {
+				System.out.println("Couldn't load how to window");
+			}
+		}
 		
-	//end code folding - will add later java doesn't support it natively like C does
+		/**
+		 * closing the how to window in main screen
+		 * @param event button
+		 */
+		public void closeHowToWindow(ActionEvent event) {
+			Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
+		    Stage CurrentStage = (Stage) btn.getScene().getWindow();
+		    CurrentStage.close();
+		}
 		
 		public int attackPoints = 3; //default attack points
 		
@@ -103,23 +114,21 @@ public class GameController {
 		*/
 		public int monsterHitPoints = 5; //default enemy health
 		private static Stage origStage;
+		
 		public Stage returnStage() {
 			return origStage;
 		}
 		
 		
-		private static int number =7;
 		/* create Start class object called pressedButton*/
-		Start pressedButton = new Start();
 		Menu menuButton = new Menu();
 		Monster monsterEvent = new Monster();
 		
 		/*
 		 * this function grabs the primary stage from the Main.java
 		 */
-		public void getStage(Stage primaryStage, int num) {
+		public void getStage(Stage primaryStage) {
 			origStage = primaryStage;
-			number = num;
 		}
 		
 		/*
@@ -127,8 +136,8 @@ public class GameController {
 		 * on the main screen and changes it to the gamePlay.fxml / Start.java screen
 		 */
 		public void startButton(ActionEvent event)throws IOException{
-			//Start pressedButton = new Start();			
-			pressedButton.openWindow(origStage, number);						
+			Start pressedButton = new Start();		
+			pressedButton.openWindow(origStage);
 		}
 		/*
 		 * This function is called on the gameplay screen to go back to the main menu
@@ -188,9 +197,7 @@ public class GameController {
 			}
 			
 			else if (randomValue == 2) { 
-				btn.setStyle("-fx-background-color: #FF0000"); //RED - ENEMY
-				//results.setText(String.valueOf("YOU'VE ENCOUNTERED AN ENEMY!... -1 ARMOR"));
-				//armorPoints--; //minus 1 armor point				
+				btn.setStyle("-fx-background-color: #FF0000"); //RED - ENEMY		
 				/*
 				 * OPEN ENEMY ENCOUNTER WINDOW...
 				 * see attack and block actionEvent handler function below
@@ -221,7 +228,7 @@ public class GameController {
 			
 			if (totalClicks == 12) {
 				EndScreen winScreen = new EndScreen();
-				winScreen.openWinWindow(origStage);
+				winScreen.openWinWindow(returnStage(), armorPoints);
 			}
 
 			updatearmorPointsTextBox(armorPoints);

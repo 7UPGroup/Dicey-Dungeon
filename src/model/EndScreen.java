@@ -17,9 +17,13 @@ import javafx.scene.layout.VBox;
 
 public class EndScreen{
 	
-	public void openWinWindow(Stage origStage) {
+	public void openWinWindow(Stage origStage, int armor) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/view/WinEndScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/WinEndScreen.fxml"));
+			Parent root = loader.load();
+			GameController setText = loader.getController();
+			setText.updateWinScreenText("You won with a score of " + armor + "!"); //set the players armor
+			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());						
 			origStage.setScene(scene);
