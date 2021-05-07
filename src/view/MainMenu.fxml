@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
    <children>
       <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" height="410.0" layoutX="-5.0" layoutY="-7.0" stroke="TRANSPARENT" strokeType="INSIDE" width="607.0" />
       <ImageView fitHeight="110.0" fitWidth="570.0" layoutX="16.0" layoutY="55.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">

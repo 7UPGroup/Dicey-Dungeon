@@ -4,21 +4,16 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.Start;
 import model.EndScreen;
-import model.Menu;
-import model.Monster;
 
 public class MonsterController {
+	/**
+	 * FXML buttons and text boxes for monster battle  window. 
+	 */
 	@FXML
 	private Text playerHealth;
 	@FXML
@@ -30,152 +25,165 @@ public class MonsterController {
 	@FXML
 	private TextArea monsterDialogue;
 	
-	public int armorPoints;
-	
-	public int monsterHitPoints = 5;
-	
+	/**
+	 * global variables and initializations for variables
+	 */
+	public int armorPoints; //get armorPoints from GameController
+	public int monsterHitPoints = 5; //initialize monster health
 	public int attackPoints = 3; //default attack point
+	int monsterBeforeAttack; //holds monster health before attack
+	int armorBeforeAttack; //holds armor points before monster attack
+	public static GameController ControllerScene1 = new GameController(); //use variable to edit gamePlay window
 	
-	public static GameController ControllerScene1 = new GameController(); //use this variable to edit gamePlay window
-		
-	public void returnToMenu(ActionEvent event)throws IOException{
-		System.out.println("Return to Menu button pressed");								
-		
-		//menuButton.openWindow(origStage);			
-	}
-	
+	/**
+	 * sets initial monster health on monster battle screen
+	 * @param initialMonsterHealth
+	 */
 	public void transferEnemyInitialHealth(int initialMonsterHealth) {
 		monsterHitPoints = initialMonsterHealth;
 		monsterHealth.setText(String.valueOf(monsterHitPoints));
 	}
+	
+	/**
+	 * transfers armor points from game play screen to monster screen
+	 * @param armorVal
+	 */
 	public void transferArmor(int armorVal) {
 		armorPoints = armorVal;
-		System.out.println("Setting New armor value");
 		playerHealth.setText(String.valueOf(armorPoints));
 	}
-
+	
+	/**
+	 * transfers GameController object to monster class
+	 * @param Scene1Controller
+	 */
 	public void transferController(GameController Scene1Controller) {
 		System.out.println("Setting controller");
 		ControllerScene1 = Scene1Controller;
 	}	
 	
+	/**
+	 * shows player health/armor on monster battle screen
+	 * @param val
+	 */
 	public void showarmorPoints(int val) {
 		playerHealth.setText(String.valueOf(armorPoints));
 	}
 	
-	/*
+	/**
 	 * called when dodge button is pressed in the monster fight window
+	 * @param event button pressed
+	 * @throws IOException
 	 */
 	public void dodge(ActionEvent event)throws IOException{
 		Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
-		String id = btn.getId(); //String id = fx:id of button pressed
-		System.out.println(id + " PRESSED");	
+		//String id = btn.getId(); //String id = fx:id of button pressed
 		dodgeButton.setStyle("-fx-background-color: #009EFF"); //LIGHT BLUE - make block button blue
 		
-		/* 
-		 * random value for monster attacks and blocked 
-		*/
-		int min2 = 1; int max2 = 3;
-		int monsterAttack = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
-		int dodgeOrNot = (int)Math.floor(Math.random()*(2-1+1)+1);
-		System.out.println("Random Monster Attack: " + monsterAttack); //print the random value
+		int min2 = 1, max2 = 3; //min and max value for monster attack
+		int monsterAttack = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random monster attack
+		int dodgeOrNot = (int)Math.floor(Math.random()*(2-1+1)+1); //random value if player will successfully dodge or not
 		
-		//subtract 1 from monsterAttack
+		armorBeforeAttack = armorPoints; //hold value for armor
+		monsterBeforeAttack = monsterHitPoints; //hold value for monster health
+		
+		//successfully dodged
 		if (dodgeOrNot == 1) {
-			monsterHitPoints -= 1;
-			//userReads = "You dealt " + attackPoints + " damage!\n";
+			monsterHitPoints -= 1; //subtract 1 health from monster
 			monsterDialogue.setText("You dodged " + monsterAttack + " damage from monster\n");
-			monsterDialogue.appendText("Monster loses 1 damage from falling\n");
+			monsterDialogue.appendText("Monster had " + monsterBeforeAttack + " health and lost -1 damage\nfrom falling\n");
 		}
+		//did not dodge
 		else if (dodgeOrNot == 2){
-			armorPoints -= monsterAttack;
+			armorPoints -= monsterAttack; //subtract monster attack from armor
 			monsterDialogue.setText("You didn't move in time from the monster!\n");
-			monsterDialogue.appendText("You took " + monsterAttack + " damage!\n");
+			monsterDialogue.appendText("You had " + armorBeforeAttack + " armor!\n");
+			monsterDialogue.appendText("You took -" + monsterAttack + " damage!\n");
 		}
 		
+		//get current stage
 	    Stage CurrentStage = (Stage) btn.getScene().getWindow();
 	    
 	    //if monster loses from blocking
 		if (monsterHitPoints <= 0 && armorPoints >= 1) {
-			System.out.println("Monster Defeated");
-			ControllerScene1.updateResults("You defeated the monster by dodging!\n");
+			ControllerScene1.updateResults("Monster had 1 health left.\nYou defeated the monster by dodging!\n");
 		    ControllerScene1.setarmorPoints(armorPoints);
 		    ControllerScene1.updatearmorPointsTextBox(armorPoints);		    
 		    CurrentStage.close();
 		}
-		//if player loses
+		//if player loses from monster attack
 		if (armorPoints <= 0 && monsterHitPoints >= 0) {
 			ControllerScene1.updateResults("Monster killed you");
 			CurrentStage.close();
 			armorPoints = 0;
 			ControllerScene1.setarmorPoints(armorPoints);
 		    ControllerScene1.updatearmorPointsTextBox(armorPoints);
-		    	
-		    EndScreen loseScreen = new EndScreen();	
 		    //make end screen appear	
-		    loseScreen.openLoseWindow(ControllerScene1.returnStage(), armorPoints, monsterAttack);//, randomValue2, ControllerScene1);
+		    EndScreen loseScreen = new EndScreen();	
+		    loseScreen.openLoseWindow(ControllerScene1.returnStage(), armorBeforeAttack, monsterAttack);
 		}
-
+		//if both player and monster are still alive
 		if (armorPoints >= 1) {
 			monsterHealth.setText(String.valueOf(monsterHitPoints));
 			showarmorPoints(armorPoints);
 		}
 	}
-	/*
+
+	/**
 	 * called when attack button is pressed in the monster fight window
+	 * @param event
+	 * @throws IOException
 	 */
 	public void attack(ActionEvent event)throws IOException{
-		//String userReads = "";
-
-		System.out.println("Attack Button Pressed");
-		int min2 = 1; int max2 = 3;
-		int randomValue2 = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
-		System.out.println("Random Monster Attack: " + randomValue2); //print the random value
+		int min2 = 1, max2 = 3;//min and max attack for monster
+		int monsterAttack = (int)Math.floor(Math.random()*(max2-min2+1)+min2); //generate random value
 		
 		Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
-		String id = btn.getId(); //String id = fx:id of button pressed
+		//String id = btn.getId(); //String id = fx:id of button pressed
 		attackButton.setStyle("-fx-background-color: #FF0000"); //RED - make attack button red
-		System.out.println(id + " PRESSED");
 		
-		monsterHitPoints -= attackPoints;
-		//userReads = "You dealt " + attackPoints + " damage!\n";
-		monsterDialogue.appendText("You dealt " + attackPoints + " damage!\n");
+		monsterBeforeAttack = monsterHitPoints; //hold monster health before attack
+		monsterHitPoints -= attackPoints; //subtract player attack from monster health
+		monsterDialogue.setText("Monster had " + monsterBeforeAttack + " health!\n");
+		monsterDialogue.appendText("You dealt -" + attackPoints + " damage!\n");
 		
+		//get current stage
 	    Stage CurrentStage = (Stage) btn.getScene().getWindow();
-			
+		
+	    //if monster is defeated
 		if (monsterHitPoints <= 0 && armorPoints >= 1) {
 			System.out.println("Monster Defeated");
-			ControllerScene1.updateResults("You dealt " + attackPoints + " damage!\nYou defeated the monster!\n");
+			ControllerScene1.updateResults("Monster had "+ monsterBeforeAttack+" health left.\nYou dealt -" + attackPoints + " damage!\nYou defeated the monster!\n");
 		    ControllerScene1.setarmorPoints(armorPoints);
 		    ControllerScene1.updatearmorPointsTextBox(armorPoints);		    
 		    CurrentStage.close();
 		}
 		
-		int beforeAttack = armorPoints;
+		armorBeforeAttack = armorPoints;//hold player armor before monster attack
+		
+		//if monster is still alive after player attack
 		if (monsterHitPoints > 0) {
-			armorPoints -= randomValue2; //subtracting monster attack from armor
-			monsterDialogue.appendText("You took " + randomValue2 + " damage!\n");
+			armorPoints -= monsterAttack; //subtracting monster attack from armor
+			monsterDialogue.appendText("You had " + armorBeforeAttack + " armor!\n");
+			monsterDialogue.appendText("You took -" + monsterAttack + " damage!");
 		}
 		
+		//if monster kills player
 		if (armorPoints <= 0 && monsterHitPoints >= 0) {
-			System.out.println("Monster defeated you aka you died");
 			ControllerScene1.updateResults("Monster defeated you");
 			CurrentStage.close();
 			ControllerScene1.setarmorPoints(0);
 		    ControllerScene1.updatearmorPointsTextBox(0);
-		    	
-		    EndScreen loseScreen = new EndScreen();	
 		    //make end screen appear	
-		    loseScreen.openLoseWindow(ControllerScene1.returnStage(), beforeAttack, randomValue2);//, randomValue2, ControllerScene1);
+		    EndScreen loseScreen = new EndScreen();	
+		    loseScreen.openLoseWindow(ControllerScene1.returnStage(), armorBeforeAttack, monsterAttack);
 		}
-
+		
+		//if both player and monster are still alive
 		if (armorPoints >= 1) {
 			monsterHealth.setText(String.valueOf(monsterHitPoints));
 			showarmorPoints(armorPoints);
 		}
-		
-		
-		
 	}
 }
 

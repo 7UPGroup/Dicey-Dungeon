@@ -9,13 +9,13 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <Button layoutX="249.0" layoutY="242.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-      <ImageView fitHeight="181.0" fitWidth="501.0" layoutX="50.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="249.0" layoutY="249.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
+      <ImageView fitHeight="181.0" fitWidth="501.0" layoutX="50.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/You%20Win.png" />
          </image>
       </ImageView>
-      <Text fx:id="winScreenText" layoutX="121.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="340.21630859375">
+      <Text fx:id="winScreenText" layoutX="24.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="551.21630859375">
          <font>
             <Font size="30.0" />
          </font>

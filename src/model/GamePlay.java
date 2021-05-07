@@ -1,24 +1,22 @@
 package model;
 
-import java.awt.Button;
-import java.awt.Insets;
-
 import controller.GameController;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 
-public class Start{
-	
+public class GamePlay{
+	/**
+	 * opens game play window for player to start their journey
+	 * @param origStage
+	 */
 	public void openWindow(Stage origStage) {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/gamePlay.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GamePlay.fxml"));
 				Parent root = loader.load();
 				GameController intializeArmorPoints = loader.getController();
-				intializeArmorPoints.updatearmorPointsTextBox(3);
+				intializeArmorPoints.updatearmorPointsTextBox(3); //initialize armor to say 3 on gamePlay window
 				//set the scene to scenebuilder
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -28,6 +26,5 @@ public class Start{
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
 	}

@@ -4,51 +4,18 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.Start;
 import model.EndScreen;
-import model.HowTo;
 import model.Menu;
 import model.Monster;
 
 public class GameController {
 	/**
-	 * FXML buttons and text boxes for main menu and game windows
+	 * FXML buttons and text boxes for game play window. 
 	 */
-		@FXML
-		private Button returnToMenu;
-		@FXML
-		private Button startButton;
-		@FXML
-		private Button howToPlayButton;
-		@FXML
-		private Text loseScreenText;
-		public void updateLoseScreenText(String Text) {
-			loseScreenText.setText(Text);
-		}
-		
-		@FXML
-		private Text winScreenText;
-		public void updateWinScreenText(String Text) {
-			winScreenText.setText(Text);
-		}
-		@FXML
-		private TextArea results;
-
-		@FXML
-		private TextArea armorPointsTextBox;
-		public void updatearmorPointsTextBox(int num) {
-			armorPointsTextBox.setText(String.valueOf("Armor: " + num));
-		}
-
 		@FXML
 		private Button button00; 	
 		@FXML
@@ -73,167 +40,144 @@ public class GameController {
 		private Button button22; 	
 		@FXML
 		private Button button23; 
+		@FXML
+		private Text loseScreenText;
+		@FXML
+		private Text winScreenText;
+		@FXML
+		private TextArea results; 
+		@FXML
+		private TextArea armorPointsTextBox;
+		@FXML
 		
 		/**
-		 * Opening the how to window in main screen
-		 * @param event button event
+		 * global variables for game play window
 		 */
-		public void openHowToWindow(ActionEvent event) {
-			try {
-				HowTo howToWindow = new HowTo();
-				howToWindow.openWindow(origStage);
-			}
-			catch(Exception e) {
-				System.out.println("Couldn't load how to window");
-			}
-		}
-		
-		/**
-		 * closing the how to window in main screen
-		 * @param event button
-		 */
-		public void closeHowToWindow(ActionEvent event) {
-			Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
-		    Stage CurrentStage = (Stage) btn.getScene().getWindow();
-		    CurrentStage.close();
-		}
-		
 		public int attackPoints = 3; //default attack points
-		
-		public int totalClicks = 0;
-		
+		public int totalClicks = 0; //count number of boxes clicked
 		public int armorPoints = 3; //default value for armor points
+		public int monsterHitPoints = 5; //default enemy health
+		private static Stage origStage; //original window, use to change scene
+		Menu menuButton = new Menu(); //creating a Menu object to return to menu
+		Monster monsterEvent = new Monster(); //creating a Monster object to open Monster Battle
+		
+		/**
+		 * shows text on lose screen
+		 * @param Text shows monster damage and armor left
+		 */
+		public void updateLoseScreenText(String Text) {
+			loseScreenText.setText(Text);
+		}
+		
+		/**
+		 * shows text on win screen
+		 * @param Text shows armor left when you successfully left dungeon
+		 */
+		public void updateWinScreenText(String Text) {
+			winScreenText.setText(Text);
+		}
+		
+		/**
+		 * sets armorPoints
+		 * @param val
+		 */
 		public void setarmorPoints(int val) {
-			System.out.println("setarmorPoints: " + val);
 			this.armorPoints = val;
 		}
-		/*
-		public void showarmorPoints(int val) {
-			playerHealth.setText(String.valueOf(armorPoints));
+		/**
+		 * updates armor text box on GamePlay screen
+		 * @param num
+		 */
+		public void updatearmorPointsTextBox(int num) {
+			armorPointsTextBox.setText(String.valueOf("Armor: " + num));
 		}
-		*/
-		public int monsterHitPoints = 5; //default enemy health
-		private static Stage origStage;
 		
+		/**
+		 * returns the original menu stage
+		 * @return
+		 */
 		public Stage returnStage() {
 			return origStage;
 		}
 		
-		
-		/* create Start class object called pressedButton*/
-		Menu menuButton = new Menu();
-		Monster monsterEvent = new Monster();
-		
-		/*
-		 * this function grabs the primary stage from the Main.java
+		/**
+		 * this method grabs the primary stage from the Main.java
+		 * @param primaryStage
 		 */
 		public void getStage(Stage primaryStage) {
 			origStage = primaryStage;
 		}
 		
-		/*
-		 * This function is called when the user presses the "Click me to start" button
-		 * on the main screen and changes it to the gamePlay.fxml / Start.java screen
-		 */
-		public void startButton(ActionEvent event)throws IOException{
-			Start pressedButton = new Start();		
-			pressedButton.openWindow(origStage);
-		}
-		/*
+		/**
 		 * This function is called on the gameplay screen to go back to the main menu
+		 * @param event when button is pressed 
+		 * @throws IOException
 		 */
-		public void returnToMenu(ActionEvent event)throws IOException{
-			System.out.println("Return to Menu button pressed");								
-			menuButton.openWindow(origStage);			
+		public void returnToMenu(ActionEvent event)throws IOException{								
+			menuButton.openWindow(origStage);		
 		}
 		
+		/**
+		 * updates the result screen on the bottom of the GamePlay window
+		 * @param msg
+		 */
 		public void updateResults(String msg) {
 			results.setText(String.valueOf(msg));
 		}
-		/*
+		
+		/**
 		 * function to handle when the user presses a button on the grid
+		 * @param event when button is pressed
+		 * @throws IOException
 		 */
 		public void gridButtonPressed(ActionEvent event)throws IOException{
-			//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
-			
-			
 			updatearmorPointsTextBox(armorPoints);
-			int min = 1; //inclusive min value adjust these and the if statements to change likelyhood of an option 
-			int max = 3; //inclusive max value
-			int randomValue = 0;			
+			int min = 1, max =3, randomBox = 0; //random value variables		
 			
 			Button btn = (Button) event.getSource(); //get fx:id of whatever button was pressed
-			String id = btn.getId(); //String id = fx:id of button pressed
-			System.out.print(id + " PRESSED");
-			System.out.println("Grid button was pressed");	
+			//String id = btn.getId(); //String id = fx:id of button pressed
 			
 			/*
 			 * using this eventually to check location of the button pressed
 			 * and then only allow buttons next to it to be pressed
 			*/
-			String buttonColumn = id.substring(id.length() - 1);
-			String buttonRow	= id.substring(id.length() - 2);
-			int row = Integer.parseInt(buttonRow);
-			int column = Integer.parseInt(buttonColumn);
+			//String buttonColumn = id.substring(id.length() - 1);
+			//String buttonRow	= id.substring(id.length() - 2);
 			
-			randomValue = (int)Math.floor(Math.random()*(max-min+1)+min); //generate random value
-			System.out.println("Random Event Value: " + randomValue); //print the random value
+			randomBox = (int)Math.floor(Math.random()*(max-min+1)+min); //generate random value
+			//System.out.println("Random Event Value: " + randomBox); //print the random value
 						
-			/* Disables btn from being pressed again but makes color lighter unfortunately */
-			btn.setDisable(true); 
+			btn.setDisable(true); //Disables btn from being pressed again but makes color lighter unfortunately
 			
+			totalClicks++;
 			
-			
-			//need to fix the last square when fighting a monster
-			
-			if (randomValue == 1) { //adjust this and the min/max statements to change likelihood of an option
-				updatearmorPointsTextBox(armorPoints);
+			//player will gain an additional piece of armor
+			if (randomBox == 1) {
 				btn.setStyle("-fx-background-color: #F6FF64"); //YELLOW - TREASURE
 				updateResults("CONGRATS! YOU'VE FOUND TREASURE... \n+1 ARMOR");
 				armorPoints++; //add 1 armor point
-				//armorPointsTextBox.setText(String.valueOf("Armor: " + armorPoints));
-				updatearmorPointsTextBox(armorPoints);
-				totalClicks++;
 			}
-			
-			else if (randomValue == 2) { 
+			//player will fight monster
+			else if (randomBox == 2 && totalClicks != 12) { 
 				btn.setStyle("-fx-background-color: #FF0000"); //RED - ENEMY		
-				/*
-				 * OPEN ENEMY ENCOUNTER WINDOW...
-				 * see attack and block actionEvent handler function below
-				 */
-				//armorPoints--;
-				System.out.println("About to open window");
-				//monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder);
-				
-				
-				
-				//monsterEvent.openWindow(origStage, armorPoints, weaponIDplaceholder, menuButton);
-				//test
-				System.out.println("Test");
 				int ranMonHealth = (int)Math.floor(Math.random()*(5-4+1)+4);
-				monsterEvent.openWindow(origStage, armorPoints, ranMonHealth, this);
-				System.out.println("opened window");
-				
-				updatearmorPointsTextBox(armorPoints);
-				totalClicks++;
-								
+				monsterEvent.openWindow(armorPoints, ranMonHealth, this);					
 			}
-			else if (randomValue == 3) { 
-				updatearmorPointsTextBox(armorPoints);				
+			//player finds nothing
+			else if (randomBox == 3) { 			
 				btn.setStyle("-fx-background-color: #FFFFFF"); //WHITE - NOTHING/BLANK TILE
 				updateResults("EMPTY AREA...");
-				totalClicks++;
 			}
-			
+			//if player goes through entire dungeon they win
 			if (totalClicks == 12) {
 				EndScreen winScreen = new EndScreen();
-				winScreen.openWinWindow(returnStage(), armorPoints);
+				if ((randomBox == 1))
+					winScreen.openWinWindow(returnStage(), armorPoints, "You found treasure and gained 1 armor!\n");
+				else 
+					winScreen.openWinWindow(returnStage(), armorPoints, "You found an empty area!\n");
 			}
-
+			//update armor
 			updatearmorPointsTextBox(armorPoints);
-			
-			
 		}
 }
 
